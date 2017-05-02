@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="D:\practice\assignmnt.css"> 
+  <title>Assignment 1</title>
+  </head>
+<body>
+
+<div class="container" style="background-color: #80dfff">
+	<form class="form-horizontal">
+		<div class="form-group">
+		<h1> Student Form</h1><br>
+		<label class="control-label col-md-2" for="name"> Name : </label>
+		<div class="col-md-8 ">
+		<input type="text" id="demo" for="name" placeholder="Enter your name" class="form-control">
+		</div>
+		</div>
+
+		<div class="form-group">
+		<label class="control-label col-md-2" for="age">Age : </label>
+		<div class="col-md-3">
+			<input type="text" class="form-control" pattern="[0-9.]+" name="age" for="age" placeholder="please Enter your age">
+		</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="gender"> Gender : </label>
+			<div class="col-md-8">
+				<label class="control-label col-md-2"><input type="radio" name="gender">  Male</label>
+				<label class="control-label col-md-2"><input type="radio" name="gender">  female</label>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="address">Address : </label>
+			<div class="col-md-8">
+				<textarea class="form-control" placeholder="enter your address" rows="2" required=""></textarea>
+			</div>
+		</div>
+
+		<div class="form-group hello">
+			<label class="control-label col-md-2" for="education">Education : </label>  <br>
+				<div class="checkbox" class=""><label class="control-label col-lg-offset-3"><input type="checkbox"> High School</label></div>
+				<div class="checkbox"><label class="col-lg-offset-3 control-label"><input type="checkbox">Diplamo</label></div>
+				<div class="checkbox"><label class="col-lg-offset-3 control-label"><input type="checkbox">Graduation</label></div>
+				<div class="checkbox"><label class="col-lg-offset-3 control-label"><input type="checkbox">Post-Graduation</label></div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="city">City : </label>
+			<div class="col-md-3"><select class="form-control">
+				<option>Vizag</option>
+				<option>Vizag</option>
+				<option>Vizag</option>
+				<option>Vizag</option>
+				<option>Vizag</option>
+				<option>Vizag</option>
+			</select>
+		</div>
+		</div>
+		<div class="clear-fix">
+			<div class="col-sm-offset-2 col-md-4"> 
+			<button class="btn btn-primary " type="clear">Clear  </button>
+			</div>
+			<div class="col-sm-offset-2 col-md-4"> 
+			<button class="btn btn-warning " type="submit">Submit</button>
+			</div>
+			</div>
+	</form>
+</div>
+<script type="text/javascript">
+	console.log(document.getElementById('demo').value);
+</script>
+</body>
+</html>

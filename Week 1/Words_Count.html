@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Word_count</title>
+</head>
+<body>
+<h3>Counting number of words</h3>
+	<textarea id="userinput" cols="40"></textarea><br>
+	<input type="submit" value="Analize" title="Click me for number of words" onclick="myfunction()">
+	<input type="reset" title="Click here to clear" value="clear" onclick="clearfunction()">
+	<p id="result"></p>
+	<p id="demo"></p>
+
+	
+
+<script>
+	function myfunction(){
+		var input= document.getElementById('userinput').value;
+		var number= parseInt(input);
+		count_words=input.split(" ");
+		document.getElementById('result').innerHTML="The count of words is "+ count_words.length +".";
+
+
+
+// A map (in JavaScript, an object) for the character=>count mappings
+var counts = {};
+
+// Misc vars
+var ch, index, len, count;
+
+for (index = 0, len = input.length; index < len; ++index) {
+    
+    ch = input.charAt(index);
+
+    count = counts[ch];
+
+    counts[ch] = count ? count + 1 : 1;
+}
+for (ch in counts) {
+    console.log(ch + " count: " + counts[ch]);
+}
+
+	}
+	
+	function clearfunction(){
+		document.getElementById('userinput').value=null;
+		document.getElementById('result').value=null;
+		document.getElementById('result').innerHTML=" ";
+
+	}
+
+</script>
+</body>
+</html>

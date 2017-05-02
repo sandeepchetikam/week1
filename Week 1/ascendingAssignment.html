@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ascending</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  	function myFunction(){
+  	var txt = new Array(); 
+  	 txt[0] = document.getElementById("text0").value;
+  	 txt[1] = document.getElementById("text1").value;
+  	 txt[2] = document.getElementById("text2").value;
+  	 txt[3] = document.getElementById("text3").value;
+  	 txt[4] = document.getElementById("text4").value;
+  	 txt[5] = document.getElementById("text5").value;
+  	 txt[6] = document.getElementById("text6").value;
+  	 txt[7] = document.getElementById("text7").value;
+  	 txt[8] = document.getElementById("text8").value;
+  	 txt[9] = document.getElementById("text9").value;
+  	 document.getElementById("demo1").innerHTML = txt;
+  	 txt.sort(function(a,b){return a-b});
+
+  	document.getElementById("demo").innerHTML = txt;
+}
+
+  </script>
+  
+</head>
+<body>
+	<input type="text" size="5" name="ascend" id="text0">
+	<input type="text" size="5" name="ascend" id="text1">
+	<input type="text" size="5" name="ascend" id="text2">
+	<input type="text" size="5" name="ascend" id="text3">
+	<input type="text" size="5" name="ascend" id="text4">
+	<input type="text" size="5" name="ascend" id="text5">
+	<input type="text" size="5" name="ascend" id="text6">
+	<input type="text" size="5" name="ascend" id="text7">
+	<input type="text" size="5" name="ascend" id="text8">
+	<input type="text" size="5" name="ascend" id="text9"><br>
+	Given Numbers :<p id="demo1"></p>
+	ascending order :<p id="demo"></p>
+	<button onclick ="myFunction()">Try it</button>
+	
+</body>
+</html>
