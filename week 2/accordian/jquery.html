@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	label{
+
+width: 20em;
+
+float: left;
+text-align: right;
+margin-right: 0.5cm;
+display: block
+}
+
+@media only screen and (max-width : 768px) {
+	label{
+		width: 10em;
+
+float: left;
+text-align: right;
+margin-right: 0.5em;
+display: block
+}
+
+label #demo {
+	float: left;
+	}
+}
+#accordian {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+}
+}
+    
+</style>
+
+	<title>jQuery</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="accordian.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<ul class="nav nav-tabs" ">
+		<li class="active"><a href="#accordian" data-toggle="tab">Account Overview</a></li>
+		<li><a href="#billing" data-toggle="tab"><b>Billing Information</b></a></li>
+	</ul>
+	<div class="panel-group fade in active" id="accordian" role="tablist" aria-multiselectable="true" style="padding: 20px" >
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="heading-one">
+				<h4 class="panel-title"> 
+					<a role="button" class="btn-block" href="#collapseOne" data-toggle="collapse" data-parent="#accordian" aria-controls="collapseOne" aria-expanded="true">
+						<i class="more-less glyphicon glyphicon-plus"></i>Time and Employee Management<span > <button  class="btn btn-xs pull-right btn-success" id="knowmore">Know More</button></span>
+					</a>
+				</h4>
+			</div>
+
+			<div id="collapseOne" class="panel-collapse collapse" aria-labelledby="heading-one">
+				<div class="panel-body">
+
+					<label>Plan :</label><p align="left"> Time and Employee Management With Unlimited Users</p>
+					<label> Price : </label><p align="left"><strike>$ 9.00</strike> $ 0.00</p>
+					<label> Subscription Amount : </label> <p align="left">$ 90.00</p>
+					<label> Discount : </label> <p align="left">100%(Unlimited users for beta joiners)</p>
+					<label> Billed Amount :</label><p align="left"> $ 0.00</p>
+					<table class="table table-responsive">
+						<thead>
+						<tr bgcolor="#6666ff">
+							<th>Date</th>
+							<th>Type</th>
+							<th>Details</th>
+							<th>Amount</th>
+						</tr>
+						<td>There are no details</td>
+						</thead>
+						
+					</table>
+				</div>
+				
+			</div>
+			
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="heading-two">
+				<h4 class="panel-title"> 
+					<a role="button" class=" btn-block" href="#collapseTwo" data-toggle="collapse" data-parent="#accordian" aria-controls="#collapseTwo" aria-expanded="true">
+						<i class="more-less glyphicon glyphicon-plus"></i>Vender And Invoice Management <span> <button class="btn btn-xs pull-right btn-success" id="knowmore">Know More</button></span>
+					</a>
+				</h4>
+			</div>
+
+			<div class="panel-collapse collapse " id="collapseTwo" aria-labelledby="heading-two">
+				<div class="panel-body">
+					<div>
+						<p>asdaffhj</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="tab tab-content fade in " id="billing">
+	<p></p>
+	</div>
+</div>
+
+
+<script>
+    $(function(){
+   $("#knowmore").click(function () {
+      $(this).text(function(i, text){
+          return text === "Know More" ? "Add User Account" : "Know More";
+      })
+   });
+})
+       
+    
+    function toggleIcon(e) {
+        $(e.target)
+            .prev('.panel-heading')
+            .find(".more-less")
+            .toggleClass('glyphicon-plus glyphicon-minus');
+    }
+    $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+    $('.panel-group').on('shown.bs.collapse', toggleIcon);
+</script>
+</body>
+</html>
