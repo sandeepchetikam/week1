@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JSON AJAX USING </title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+<br>
+
+<button class="btn btn-lg btn-info" id="addbtn" data-toggle="modal" data-target="#myModal">Add Data</button><br><br>
+
+<table class="table table-responsive table-striped table-bordered table-inverse" id="table1">
+			<thead>
+				<tr>
+				<th>id</th>
+				<th>UserId</th>	
+				<th>Title</th>
+				<th>Body</th>
+				<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+				
+			
+			</table>
+
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+
+							<!-- Modal Content -->
+	<div class="modal-content">
+		<div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">TABLE DATA</h4>
+        </div>
+		<div class="modal-body">
+        
+			  <!--- FORM -->
+
+          <form class="form-horizontal" id="form1" novalidate>
+          
+          	 <div class="form-group">
+        <label class="col-md-2 control-label">ID :</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" name="id" id="id1" disabled="disabled" />
+        </div>
+    </div>
+        
+
+		<div class="form-group">
+		<label class="control-label col-md-2" for="age">User ID : </label>
+		<div class="col-md-3">
+			<input type="number" id="userid" class="form-control"  pattern="[0-9.]+" name="userid" for="age" placeholder="UserId">
+		</div>
+		</div>
+
+
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="gender"> Title: </label>
+			<div class="col-md-8">
+				<textarea type="text" style="resize: none" name="title" class="form-control" rows="2" id="title" placeholder="Title "></textarea>
+			</div>
+		</div>
+
+		
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="address">Body : </label>
+			<div class="col-md-8">
+				<textarea class="form-control" style="resize: none" name="body" id="body" placeholder="Body" rows="2" required=""></textarea><br>
+			</div>
+			<div class=" col-md-offset-2 col-md-3 "><button class="btn btn-info" type="submit" id="submitbtn" >Submit</button></div>
+			<div class=" col-md-3 "><button class="btn btn-info" style="display: none" type="submit" data-dismiss="modal" id="savebtn">Save</button></div>
+			<div class=" col-md-3 "><button class="btn btn-danger" data-dismiss="modal" type="reset" value="reset" id="cancelbtn">cancel</button></div>
+			<input type="hidden" id="test">
+
+		</div>
+	</form>	
+        </div>
+
+				
+			</div>
+		</div>
+
+		
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+$(document).ready(function() {
+   
+// JSON DATA APPENDING
+
+$.ajax('http://jsonplaceholder.typicode.com/posts', {
+  method: 'GET'
+}).then(function(data) {
+  var tr;
+ 
+   for (i=0; i< data.length; i++ ) {
+
+     	
+        tr = $('<tr id= tab'+data[i].id +'>');
+        tr.append("<td>" + data[i].id + "</td>");
+        tr.append("<td>" + data[i].userId + "</td>");
+        tr.append("<td>" + data[i].title + "</td>");
+        tr.append("<td>"+ data[i].body +"</td>");
+
+        tr.append("<td class='col-md-1' ><button id='button1'  style='height: 30px; width: 30px;' class='btn-danger btn-md'><i class='fa fa-trash-o' aria-hidden='true' data-toggle='tooltip' title='Remove'></i></button> <button id='button2' style='height: 30px; width: 30px;' class='btn-warning btn-md announce' ><i class='fa fa-pencil-square-o' aria-hidden='true' data-toggle='tooltip' title='Edit'></i></button></td>")
+        $('table').append(tr);
+
+    }
+
+});
+
+
+	// SUBMITING DATA
+
+	$('form').on('submit', function (e) {
+
+  e.preventDefault();
+
+  var id1 = $('form').find('input[type="text"]').val();
+  var userid = $('form').find('input[type="number"]').val();
+  var title = $('form').find('textarea').val();
+ 
+  var body = $('form').find('#body').val();  
+  $("#myModal").modal('hide');
+ 
+  var txt = {"userid":userid,"title":title,"body":body}
+  
+  $.ajax('http://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  dataType: 'json',
+  data: txt
+}).then(function(data) {
+	var count = $('#table1 tr').length;
+	console.log(data);
+ $('table').append('<tr id =tab'+data.id+'><td class="rownumber_">'+data.id+'</td><td>'+userid+'</td><td>' + title + '</td><td>'+body+"</td><td class='col-md-1' ><button id='button1'  style='height: 30px; width: 30px;' class='btn-danger btn-md'><i class='fa fa-trash-o' aria-hidden='true' data-toggle='tooltip' title='Remove'></i></button> <button id='button2' style='height: 30px; width: 30px;' class='btn-warning btn-md announce' ><i class='fa fa-pencil-square-o' aria-hidden='true' data-toggle='tooltip' title='Edit'></i></button></td></tr>")
+
+});
+  
+
+  
+});
+
+
+
+//DELETING THE ROW
+
+	$("#table1").on('click','#button1',function(){
+        $(this).parent().parent().remove();
+    });
+
+  	// EDIT BUTTON
+	
+   $(document).on("click",".announce",function(){ // Click to only happen on announce links
+   
+     $('#myModal').modal('show');
+	});
+
+   
+                $(document).on('click','#button2',function(){
+
+                        var n=$(this).closest("tr").find('td:eq(0)').text();
+                        var na=$(this).closest("tr").find('td:eq(1)').text();
+                        var g=$(this).closest("tr").find('td:eq(2)').text();
+                        var pn=$(this).closest("tr").find('td:eq(3)').text();
+                        var ta=$(this).closest("tr").find('td:eq(4)').text();
+                      	$('#savebtn').show();
+                        	
+                       $('#id1').val(n);
+                       $('#userid').val(na);
+                       $('#title').val(g);
+                       $('#body').val(pn);
+                         
+                       var row_index=$(this).closest("tr").index();
+                       $('#test').val(row_index);
+                            
+    });
+
+        // SAVE BUTTON
+   $(document).on('click','#savebtn',function(e){
+     e.preventDefault();
+ 	 var userid = $('#userid').val();
+     var title = $('#title').val();
+     var body =$('#body').val();
+     var num =$('#id1').val();
+     var  hi = $('#test').val();
+     var frm = $('#form1');
+     
+     $("#myModal").modal('hide');
+     var params= {"userid":userid,"title":title,"body":body};
+    
+        $.ajax({
+             url: 'http://jsonplaceholder.typicode.com/posts/'+ num,
+             method: 'PUT',
+             data: params
+        }).then(function(response) {
+                    
+              
+               $('#tab'+num).find('td').eq(0).text(num);
+               $('#tab'+num).find('td').eq(1).text(userid);
+               $('#tab'+num).find('td').eq(2).text(title);
+               $('#tab'+num).find('td').eq(3).text(body);
+                          	
+   }); 
+  }); 
+ });                 
+
+</script>
+
+</body>
+</html>

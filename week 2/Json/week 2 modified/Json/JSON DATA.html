@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JSON DATA</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="JSON.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <style type="text/css">
+  	input[type=number]::-webkit-inner-spin-button:before,
+input[type=number]::-webkit-inner-spin-button:after {
+    content: "^";
+    position:absolute;
+    right: 0;
+    font-family:monospace;
+    line-height:
+}
+
+input[type=number]::-webkit-inner-spin-button:before {
+    top:0px;
+}
+
+input[type=number]::-webkit-inner-spin-button:after {
+    bottom:0px;
+    -webkit-transform: rotate(180deg);
+}
+  </style>
+</head>
+<body>
+	<div class="container-fluid">
+		
+			<br><button class="btn btn-lg btn-info" id="addbtn">ADD DATA</button><br><br>
+			<!--Table -->
+			<table class="table table-responsive table-striped table-bordered table-inverse" id="table1">
+			<thead>
+				<tr>
+				<th>#</th>
+				<th>NAME</th>	
+				<th>GENDER</th>
+				<th>Phone</th>
+				<th>Address</th>
+				<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+				
+			
+			</table>
+		<!--Form -->
+		<div class="container-fluid" style="width: 50%;">
+			<form class="form-horizontal" id="form1" novalidate >
+		<div class="form-group">
+		
+		<label class="control-label col-md-2" for="name"> Name : </label>
+		<div class="col-md-8 ">
+		<input type="text" id="name" for="name" name="name" placeholder="Enter your name" class="form-control">
+		</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="gender"> Gender : </label>
+			<div class="col-md-8">
+				<label class="control-label col-md-3"><input type="radio" class="gender" value="Male" id="M" name="gen">  Male</label>
+				<label class="control-label col-md-3"><input type="radio" id="F" class="gender" value="Female" name="gen">  female</label>
+			</div>
+		</div>
+
+		<div class="form-group">
+		<label class="control-label col-md-2" for="age">Phone : </label>
+		<div class="col-md-5">
+			<input type="number" id="phoneno" class="form-control" name="phoneno" maxlength="10" name="age" for="age" placeholder="please Enter your PhoneNo">
+		</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="address">Address : </label>
+			<div class="col-md-8">
+				<textarea class="form-control" name="address" id="address" placeholder="enter your address" rows="2" required=""></textarea><br>
+			</div>
+			<div class=" col-md-offset-2 col-md-3 "><button class="btn btn-info" type="submit" id="submitbtn">Submit</button></div>
+			<div class=" col-md-3 "><button class="btn btn-info" style="display: none" type="reset" id="savebtn">Save</button></div>
+			<div class=" col-md-3 "><button class="btn btn-danger" type="reset" id="cancelbtn">cancel</button></div>
+			<input type="hidden" id="test">
+		</div>
+	</form>	
+	</div>		
+</div>
+
+	<script>
+	function Delete(){ 
+		var par = $(this).parent().parent();  
+		par.remove();
+	 }; 
+
+	
+$(document).ready(function(){
+
+
+//DATA APPENDING ON SUBMIT
+
+	$('form').on('submit', function (e) {
+  e.preventDefault();
+
+  var newName = $('form').find('input[type="text"]').val();
+  var newPhone = $('form').find('input[type="number"]').val();
+
+  var newGender = $('form').find("input[name='gender']:checked").val();
+  var newAddress = $('form').find('textarea').val();
+  var rowCount = $('#table1 tr').length;
+  var button=$('#button1');
+  console.log(rowCount);
+
+
+  $('table').append('<tr id=tab'+(rowCount - 1)+'><td>'+rowCount+'</td><td>' + newName + '</td><td>'+newGender+'</td><td>'+newPhone+'</td><td>'+newAddress+"</td><td class='col-md-1' ><button id='button1' onClick='Delete()' style='height: 30px; width: 30px;' class='btn-danger btn-md'><i class='fa fa-trash-o' aria-hidden='true' data-toggle='tooltip' title='Remove'></i></button> <button id='button2' style='height: 30px; width: 30px;' class='btn-warning btn-md'><i class='fa fa-pencil-square-o' aria-hidden='true' data-toggle='tooltip' title='Edit'></i></button></td></tr>")
+});
+
+	//SUBMIT BUTTON
+
+	$('#form1').hide();
+    $('[data-toggle="tooltip"]').tooltip(); 
+    $('#submitbtn').click(function(){
+		$('#table1').fadeIn();
+		$('#form1').hide();
+	 	$('#addbtn').fadeIn();
+	 
+
+
+	});
+
+	// SAVE BUTTON
+
+	
+    $('#savebtn').click(function(){
+		$('#table1').fadeIn();
+		$('#form1').hide();
+	 	$('#addbtn').fadeIn();
+
+	});
+
+
+//CANCEL BUTTON
+
+    $('#cancelbtn').click(function(){
+    	$('#form1').hide();
+    	$('#table1').fadeIn();
+    	$('#addbtn').fadeIn();
+    	
+    })
+
+//ADD DATA
+
+	$('#addbtn').click(function(){
+		$('#table1').hide();
+			$('#form1').fadeIn("slow");
+			$('#savebtn').hide();
+			
+
+	});
+
+
+
+//Deleting Row
+$("#table1").on('click','#button1',function(){
+        $(this).parent().parent().remove();
+    });
+
+
+
+
+
+	//Appending JSON Array
+
+
+  var Json = [{"name":"SANDEEP","Gender":"Male","PhoneNo":"9032837262","Address":"flat-211,rlynew colony","id":"2"},{"id":"3","name":"druv","Gender":"Male","PhoneNo":"9030913988","Address":"flat 201,akkayapalem"},{"id":"4","name":"suman","Gender":"Male","PhoneNo":"9573566208","Address":"24-53-4/3,rlynew colony"},{"name":"SANDEEP","Gender":"Male","PhoneNo":"9032837262","Address":"flat-211,rlynew colony","id":"2"},{"name":"SANDEEP","Gender":"Male","PhoneNo":"9032837262","Address":"flat-211,rlynew colony","id":"2"},{"name":"SANDEEP","Gender":"Male","PhoneNo":"9032837262","Address":"flat-211,rlynew colony","id":"2"},{"name":"SANDEEP","Gender":"Male","PhoneNo":"9032837262","Address":"flat-211,rlynew colony","id":"2"},]
+  var tr;
+
+  for(var i=0;i<Json.length;i++){
+
+  	tr=$('<tr id=tab'+i+'>');
+  	tr.append('<td class="form_id">'+(i+1)+'</td>')
+  	tr.append('<td>' + Json[i].name + '</td>');
+  	tr.append('<td>'+ Json[i].Gender+'</td>');
+  	tr.append('<td>'+ Json[i].PhoneNo+ '</td>');
+  	tr.append('<td>'+ Json[i].Address+ '</td>');
+  	tr.append("<td class='col-md-1'><button id='button1' onClick='Delete()' style='height: 30px; width: 30px;' class='btn-danger btn-md'><i class='fa fa-trash-o' aria-hidden='true' data-toggle='tooltip' title='Remove'></i></button> <button id='button2' style='height: 30px; width: 30px;' class='btn-warning btn-md'><i class='fa fa-pencil-square-o' aria-hidden='true' data-toggle='tooltip' title='Edit'></i></button></td>");
+  	$('table').append(tr);
+  }
+
+
+  	// Edit Button
+	$(document).ready(function(){
+                $(document).on('click','#button2',function(){
+                         $("#table1").hide();
+                          $("#form1").fadeIn();
+                          $('#addbtn').hide();
+                          $('#savebtn').show();
+ var row_index=$(this).closest("tr").index();
+                       $('#test').val(row_index);
+                      
+        		                  
+                          
+                        var n=$(this).closest("tr").find('td:eq(0)').text();
+                        var na=$(this).closest("tr").find('td:eq(1)').text();
+                        var g=$(this).closest("tr").find('td:eq(2)').text();
+                        var pn=$(this).closest("tr").find('td:eq(3)').text();
+                        var ta=$(this).closest("tr").find('td:eq(4)').text();
+
+                        $('#num').val(n);
+                        $('#name').val(na);
+                         $('input[name="gen"][value='+g+']').prop('checked', true);
+                          $('#phoneno').val(pn);
+                           $('#address').val(ta);
+                         console.log(g);
+
+                });
+            });
+
+//SAVE BUTTON
+
+$(document).on('click','#savebtn',function(e){
+     e.preventDefault();
+ 	 var name = $('#name').val();
+     var gender = $('input[name="gen"]:checked').val();
+     var phoneno =$('#phoneno').val();
+     var address =$('#address').val();
+     var  j = $('#test').val();
+     var frm = $('#form1')[0];
+     frm.reset();    
+     console.log(gender);
+    
+               $('#tab'+j).find('td').eq(0).text();
+               $('#tab'+j).find('td').eq(1).text(name);
+               $('#tab'+j).find('td').eq(2).text(gender);
+               $('#tab'+j).find('td').eq(3).text(phoneno);
+               $('#tab'+j).find('td').eq(4).text(address);    
+   	
+   }); 
+  }); 
+
+
+
+
+
+
+	
+</script>
+</body>
+</html>
